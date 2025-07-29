@@ -1,22 +1,19 @@
 const { getDefaultConfig } = require('expo/metro-config');
 
-module.exports = (async () => {
+module.exports = async () => {
   const config = await getDefaultConfig(__dirname);
 
-  // Allow `.cjs` and `.svg` files (for custom icons/assets)
-  config.resolver.sourceExts = [
-    ...config.resolver.sourceExts,
-    'cjs',
-    'svg'
-  ];
+  // Support additional file extensions
+  config.resolver.sourceExts = [...config.resolver.sourceExts, 'cjs', 'svg'];
 
-  // Optional: treat SVGs as react-native components
+  // Treat SVGs as React components
   config.transformer = {
     ...config.transformer,
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   };
 
+  // Remove 'svg' from assetExts so Metro defers to the transformer
   config.resolver.assetExts = config.resolver.assetExts.filter(ext => ext !== 'svg');
 
   return config;
-})();
+};
