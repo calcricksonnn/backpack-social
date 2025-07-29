@@ -14,7 +14,7 @@
   "dependencies": {
     "expo": "~53.0.20",
     "expo-status-bar": "~2.2.3",
-    "expo-router": "^5.1.5",
+    "expo-router": "^5.1.3",             // latest published version [A](https://www.npmjs.com/package/expo-router?copilot_analytics_metadata=eyJldmVudEluZm9fY2xpY2tEZXN0aW5hdGlvbiI6Imh0dHBzOlwvXC93d3cubnBtanMuY29tXC9wYWNrYWdlXC9leHBvLXJvdXRlciIsImV2ZW50SW5mb19tZXNzYWdlSWQiOiJIYzRtMTlpdEdxc1NpSnBDZUU1SkQiLCJldmVudEluZm9fY29udmVyc2F0aW9uSWQiOiJaYzRyNlFxWmlGTlRCS3hVZkg0TDkiLCJldmVudEluZm9fY2xpY2tTb3VyY2UiOiJjaXRhdGlvbkxpbmsifQ%3D%3D&citationMarker=9F742443-6C92-4C44-BF58-8F5A7C53B6F1)
     "expo-location": "~18.1.6",
     "expo-image-picker": "~14.3.1",
     "expo-file-system": "~18.1.11",
