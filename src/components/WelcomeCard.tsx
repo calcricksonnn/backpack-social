@@ -9,7 +9,7 @@ export default function WelcomeCard({ onPress }: { onPress: () => void }) {
 
   return (
     <ImageBackground
-      source={require('../assets/splash.jpg')}
+      source={require('../assets/splash.png')}
       resizeMode="cover"
       style={styles.bg}
     >
