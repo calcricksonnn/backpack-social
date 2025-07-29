@@ -1,18 +1,19 @@
 import React from 'react';
-import { View } from 'react-native';
-import { TextInput, IconButton } from 'react-native-paper';
+import { TextInput, View, Text } from 'react-native';
 
-export const AuthInput = ({ label, value, onChange, error, secure, toggleSecure }) => (
-  <View style={{ marginBottom: 16 }}>
+export const AuthInput = ({ label, value, onChangeText, placeholder }) => (
+  <View style={{ marginVertical: 10 }}>
+    <Text style={{ fontWeight: '500', marginBottom: 4 }}>{label}</Text>
     <TextInput
-      label={label}
       value={value}
-      onChangeText={onChange}
-      secureTextEntry={secure}
-      error={!!error}
-      right={toggleSecure && (
-        <TextInput.Icon icon={secure ? 'eye-off' : 'eye'} onPress={toggleSecure} />
-      )}
+      onChangeText={onChangeText}
+      placeholder={placeholder}
+      style={{
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 6,
+        padding: 10,
+      }}
     />
   </View>
 );
