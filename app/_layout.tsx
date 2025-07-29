@@ -9,8 +9,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider } from '../src/context/AuthContext';
 
 export default function Layout() {
+  console.log('🔍 useColorScheme():', useColorScheme);
+
   const colorScheme = useColorScheme();
+  console.log('🎨 Resolved color scheme:', colorScheme);
+
   const barStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content';
+  console.log('📱 StatusBar barStyle:', barStyle);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
