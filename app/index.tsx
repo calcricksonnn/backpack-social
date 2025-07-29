@@ -3,8 +3,8 @@ import WelcomeCard from '@components/WelcomeCard';
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView>
-      <ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <WelcomeCard />
         {/* We’ll layer more: Map preview, Journey button, etc. */}
       </ScrollView>
