@@ -1,32 +1,86 @@
-import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  Animated,
+  ImageBackground,
+} from 'react-native';
+import { Text } from 'react-native-paper';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
-export default function WelcomeCard({ onPress }: { onPress: () => void }) {
+const { width } = Dimensions.get('window');
+
+export default function WelcomeCard({ onPress }: { onPress?: () => void }) {
+  const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  // animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(20)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+      Animated.spring(translateY, {
+        toValue: 0,
+        friction: 8,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
+
+  const handlePress = () => {
+    if (onPress) return onPress();
+    router.push('/signup');
+  };
 
   return (
     <ImageBackground
       source={require('../assets/splash.png')}
-      resizeMode="cover"
       style={styles.bg}
+      resizeMode="cover"
     >
       <LinearGradient
         colors={['transparent', 'rgba(0,0,0,0.6)']}
         style={[styles.gradient, { paddingBottom: insets.bottom + 24 }]}
       >
-        <BlurView intensity={40} tint="light" style={styles.overlay}>
-          <Text style={styles.title}>Explore With Confidence</Text>
-          <Text style={styles.subtitle}>
-            Connect. Discover. Stay safe. Your journey starts here.
-          </Text>
+        <BlurView intensity={30} tint="dark" style={styles.overlay}>
+          <Animated.View
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY }],
+            }}
+          >
+            <Text style={styles.title}>Explore With Confidence</Text>
+            <Text style={styles.subtitle}>
+              Connect. Discover. Stay safe. Your journey starts here.
+            </Text>
+          </Animated.View>
         </BlurView>
 
-        <TouchableOpacity style={styles.btn} onPress={onPress} activeOpacity={0.8}>
-          <Text style={styles.btnText}>Get Started</Text>
-        </TouchableOpacity>
+        <Animated.View
+          style={{
+            opacity: fadeAnim,
+            transform: [{ translateY }],
+          }}
+        >
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={handlePress}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.btnText}>Get Started</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </LinearGradient>
     </ImageBackground>
   );
@@ -46,19 +100,21 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: 'rgba(255,255,255,0.15)',
     borderRadius: 16,
-    padding: 24,
+    padding: 20,
+    marginHorizontal: (width * 0.05),
     marginBottom: 32,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.3)',
+    overflow: 'hidden',
   },
   title: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: '900',
     color: '#fff',
     textAlign: 'center',
     marginBottom: 12,
     letterSpacing: 1.2,
-    textShadowColor: 'rgba(0,0,0,0.6)',
+    textShadowColor: 'rgba(0,0,0,0.7)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,
   },
@@ -71,17 +127,18 @@ const styles = StyleSheet.create({
   btn: {
     alignSelf: 'center',
     backgroundColor: '#3ddc84',
-    paddingHorizontal: 32,
+    paddingHorizontal: 36,
     paddingVertical: 12,
     borderRadius: 12,
-    marginBottom: 32,
+    marginBottom: 40,
     shadowColor: '#3ddc84',
-    shadowOpacity: 0.7,
-    shadowRadius: 12,
+    shadowOpacity: 0.6,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
   },
   btnText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#fff',
   },
 });
