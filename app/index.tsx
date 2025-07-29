@@ -19,8 +19,8 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <WelcomeCard />
-        {/* Next: MapPreview, Journey Button, etc. */}
+        <WelcomeCard onPress={() => router.push('/journey/Tracker')} />
+        {/* Next: Add MapPreview, Journey Button, Reflection Teaser, etc. */}
       </ScrollView>
     </SafeAreaView>
   );
