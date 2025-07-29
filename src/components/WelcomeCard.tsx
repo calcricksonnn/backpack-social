@@ -1,64 +1,33 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  View,
-  ImageBackground,
-  StyleSheet,
-  Animated,
-  Dimensions
-} from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { useRouter } from 'expo-router';
+import React from 'react';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const { width } = Dimensions.get('window');
-
-export default function WelcomeCard() {
-  const router = useRouter();
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.9)).current;
-
-  useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        friction: 6,
-        useNativeDriver: true
-      })
-    ]).start();
-  }, []);
+export default function WelcomeCard({ onPress }: { onPress: () => void }) {
+  const insets = useSafeAreaInsets();
 
   return (
     <ImageBackground
-      source={require('@assets/splash.png')}
-      style={styles.bg}
+      source={require('../assets/splash.jpg')}
       resizeMode="cover"
+      style={styles.bg}
     >
-      <Animated.View
-        style={[
-          styles.overlay,
-          {
-            opacity: fadeAnim,
-            transform: [{ scale: scaleAnim }]
-          }
-        ]}
+      <LinearGradient
+        colors={['transparent', 'rgba(0,0,0,0.6)']}
+        style={[styles.gradient, { paddingBottom: insets.bottom + 24 }]}
       >
-        <Text style={styles.title}>🌍 Backpack Social</Text>
-        <Text style={styles.subtitle}>
-          Meet fellow travelers. Find events. Trace your journey.
-        </Text>
-        <Button
-          mode="contained"
-          onPress={() => router.push('/signup')}
-          style={styles.btn}
-          labelStyle={styles.btnText}
-        >
-          Get Started
-        </Button>
-      </Animated.View>
+        <BlurView intensity={40} tint="light" style={styles.overlay}>
+          <Text style={styles.title}>Explore With Confidence</Text>
+          <Text style={styles.subtitle}>
+            Connect. Discover. Stay safe. Your journey starts here.
+          </Text>
+        </BlurView>
+
+        <TouchableOpacity style={styles.btn} onPress={onPress} activeOpacity={0.8}>
+          <Text style={styles.btnText}>Get Started</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </ImageBackground>
   );
 }
@@ -66,42 +35,53 @@ export default function WelcomeCard() {
 const styles = StyleSheet.create({
   bg: {
     flex: 1,
-    justifyContent: 'center'
+    width: '100%',
+    justifyContent: 'flex-end',
+  },
+  gradient: {
+    width: '100%',
+    paddingHorizontal: 24,
+    justifyContent: 'flex-end',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.55)',
-    marginHorizontal: 24,
-    padding: 24,
+    backgroundColor: 'rgba(255,255,255,0.15)',
     borderRadius: 16,
+    padding: 24,
+    marginBottom: 32,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.2)',
-    shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 2 }
+    borderColor: 'rgba(255,255,255,0.3)',
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: '900',
     color: '#fff',
+    textAlign: 'center',
     marginBottom: 12,
-    letterSpacing: 1.2
+    letterSpacing: 1.2,
+    textShadowColor: 'rgba(0,0,0,0.6)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
   },
   subtitle: {
     fontSize: 16,
     color: '#eee',
-    marginBottom: 18,
-    lineHeight: 22
+    textAlign: 'center',
+    lineHeight: 22,
   },
   btn: {
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     backgroundColor: '#3ddc84',
-    paddingHorizontal: 18,
-    paddingVertical: 6,
-    borderRadius: 8
+    paddingHorizontal: 32,
+    paddingVertical: 12,
+    borderRadius: 12,
+    marginBottom: 32,
+    shadowColor: '#3ddc84',
+    shadowOpacity: 0.7,
+    shadowRadius: 12,
   },
   btnText: {
+    fontSize: 16,
+    fontWeight: '600',
     color: '#fff',
-    fontWeight: 'bold'
-  }
+  },
 });
