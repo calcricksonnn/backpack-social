@@ -1,18 +1,20 @@
-import { Stack } from 'expo-router';
-import { Provider as PaperProvider } from 'react-native-paper';
+// app/_layout.tsx
+import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { AuthProvider } from '../src/context/AuthContext';
+import { Stack } from 'expo-router';
 
 export default function Layout() {
   return (
     <SafeAreaProvider>
-      <PaperProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <View style={{ flex: 1 }}>
+      <AuthProvider>
+        <PaperProvider>
+          <SafeAreaView style={{ flex: 1 }}>
             <Stack screenOptions={{ headerShown: false }} />
-          </View>
-        </SafeAreaView>
-      </PaperProvider>
+          </SafeAreaView>
+        </PaperProvider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }
