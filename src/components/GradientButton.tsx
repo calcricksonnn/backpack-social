@@ -1,20 +1,19 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Button } from 'react-native-paper';
 
 export const GradientButton = ({ text, onPress }) => (
-  <Button
-    mode="contained"
-    onPress={onPress}
-    contentStyle={{ backgroundColor: 'transparent' }}
-    style={{ overflow: 'hidden', borderRadius: 8 }}
-  >
+  <Pressable onPress={onPress}>
     <LinearGradient
-      colors={['#3ddc84', '#00c2b2']}
-      style={{ flex: 1, paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
+      colors={['#5EA3F6', '#007AFF']}
+      style={{
+        padding: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginVertical: 8,
+      }}
     >
-      <Text style={{ color: '#fff', fontWeight: 'bold' }}>{text}</Text>
+      <Text style={{ color: 'white', fontWeight: '600' }}>{text}</Text>
     </LinearGradient>
-  </Button>
+  </Pressable>
 );
