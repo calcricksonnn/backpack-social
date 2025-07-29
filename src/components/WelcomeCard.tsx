@@ -40,7 +40,7 @@ export default function WelcomeCard({ onPress }: { onPress?: () => void }) {
 
   const handlePress = () => {
     if (onPress) return onPress();
-    router.push('/signup');
+    router.push('/journey/Tracker'); // 🚀 Launch tracker directly
   };
 
   return (
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.15)',
     borderRadius: 16,
     padding: 20,
-    marginHorizontal: (width * 0.05),
+    marginHorizontal: width * 0.05,
     marginBottom: 32,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.3)',
