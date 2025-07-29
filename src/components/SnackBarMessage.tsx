@@ -1,8 +1,21 @@
 import React from 'react';
-import { Snackbar } from 'react-native-paper';
+import { Text, View } from 'react-native';
 
-export const SnackbarMessage = ({ visible, onDismiss, message }) => (
-  <Snackbar visible={visible} onDismiss={onDismiss} duration={3000}>
-    {message}
-  </Snackbar>
-);
+export const SnackbarMessage = ({ message, visible }) => {
+  if (!visible) return null;
+
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        bottom: 40,
+        backgroundColor: '#333',
+        padding: 12,
+        borderRadius: 8,
+        alignSelf: 'center',
+      }}
+    >
+      <Text style={{ color: 'white' }}>{message}</Text>
+    </View>
+  );
+};
