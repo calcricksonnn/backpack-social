@@ -1,7 +1,10 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo', '@react-native/babel-preset'],
+    presets: [
+      ['babel-preset-expo', { jsxRuntime: 'automatic' }],
+      '@react-native/babel-preset',
+    ],
     plugins: [
       ['@babel/plugin-transform-class-properties', { loose: true }],
       ['@babel/plugin-transform-private-methods', { loose: true }],
