@@ -3,6 +3,8 @@
     "name": "Backpack Social",
     "slug": "backpack-social",
     "version": "1.0.0",
+    "sdkVersion": "53.0.0",               
+    "scheme": "backpacksocial",           
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
