@@ -1,12 +1,26 @@
-import { SafeAreaView, ScrollView } from 'react-native';
-import WelcomeCard from '@components/WelcomeCard';
+import React, { useEffect } from 'react';
+import { View, ScrollView, SafeAreaView } from 'react-native';
+import { useAuth } from '../src/context/AuthContext';
+import { useRouter } from 'expo-router';
+import WelcomeCard from '../src/components/WelcomeCard';
 
 export default function HomeScreen() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace('/signup');
+    }
+  }, [user, loading]);
+
+  if (loading || !user) return null;
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <WelcomeCard />
-        {/* We’ll layer more: Map preview, Journey button, etc. */}
+        {/* Next: MapPreview, Journey Button, etc. */}
       </ScrollView>
     </SafeAreaView>
   );
