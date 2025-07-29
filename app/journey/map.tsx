@@ -2,7 +2,7 @@ import MapView, { Marker, Polyline } from 'react-native-maps';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useSharedValue } from 'react-native-reanimated';
 import { useState, useMemo, useRef } from 'react';
-import { BlurView } from '@react-native-community/blur';
+import { BlurView } from 'expo-blur';
 
 const MapScreen = () => {
   const mapRef = useRef(null);
