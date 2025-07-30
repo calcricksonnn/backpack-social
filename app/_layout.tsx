@@ -1,5 +1,5 @@
 import React from 'react';
-import Slot from 'expo-router/slot'; // ✅ Direct import to avoid undefined
+import Slot from 'expo-router/slot';
 import {
   SafeAreaView,
   StatusBar,
