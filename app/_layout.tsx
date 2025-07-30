@@ -1,29 +1,15 @@
 import React from 'react';
-import { Slot } from 'expo-router';
 import { useColorScheme, StatusBar } from 'react-native';
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-} from 'react-native-safe-area-context';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ThemeProvider } from '../src/context/AuthContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-export default function Layout() {
+export default function Layout({ children }) {
   const colorScheme = useColorScheme();
-  const barStyle = colorScheme === 'dark' 
-    ? 'light-content' 
-    : 'dark-content';
+  const barStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content';
 
   return (
     <SafeAreaProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <ThemeProvider>
-          <SafeAreaView style={{ flex: 1 }}>
-            <StatusBar barStyle={barStyle} />
-            <Slot />
-          </SafeAreaView>
-        </ThemeProvider>
-      </GestureHandlerRootView>
+      <StatusBar barStyle={barStyle} />
+      {children}
     </SafeAreaProvider>
   );
 }
