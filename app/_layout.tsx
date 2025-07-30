@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slot } from 'expo-router';
+import Slot from 'expo-router/slot'; // ✅ Direct import to avoid undefined
 import {
   SafeAreaView,
   StatusBar,
@@ -16,6 +16,8 @@ export default function Layout() {
 
   const barStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content';
   console.log('📱 StatusBar barStyle:', barStyle);
+
+  console.log('🧩 Slot:', Slot); // sanity check
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
